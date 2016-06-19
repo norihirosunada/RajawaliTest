@@ -54,20 +54,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event){
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
-            renderer.getObjectAt(event.getX(), event.getY());
-            Log.d("onTouched","ACTION_DOWN");
-//            return true;
-        }else if(event.getAction() == MotionEvent.ACTION_MOVE){
-            renderer.getObjectAt(event.getX(),event.getY());
-            Log.d("onTouched", "ACTION_MOVE");
-        }
 
         switch (event.getAction()){
-            case MotionEvent.
+            case MotionEvent.ACTION_DOWN:
+                renderer.getObjectAt(event.getX(), event.getY(),event);
+                Log.d("onTouched","ACTION_DOWN");
+                break;
+            case MotionEvent.ACTION_MOVE:
+                renderer.getObjectAt(event.getX(),event.getY(),event);
+                Log.d("onTouched", "ACTION_MOVE");
+                break;
+            default:break;
         }
-
-        return super.onTouchEvent(event);
+        return true;
+//        return super.onTouchEvent(event);
     }
 
     @Override

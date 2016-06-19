@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.widget.Switch;
 
 import org.rajawali3d.Object3D;
 import org.rajawali3d.lights.DirectionalLight;
@@ -136,18 +137,31 @@ public class Renderer extends RajawaliRenderer implements OnObjectPickedListener
 
 
     public void onObjectPicked(@NonNull Object3D object){
-        Log.d("position",""+object.getX());
-        Log.d("position",""+object.getY());
-        object.setX(object.getX()+0.1);
-        object.setY(object.getY()+0.1);
+        Log.d("position", "" + object.getX());
+        Log.d("position", "" + object.getY());
+        object.setX(object.getX() + 0.1);
+        object.setY(object.getY() + 0.1);
     }
 
-    public void getObjectAt(float x, float y){
-        mPicker.getObjectAt(x,y);
-        touchedX = x;
-        touchedY = y;
-        Log.d("touched","X="+ x);
-        Log.d("touched","Y="+ y);
+    public void getObjectAt(float x, float y, MotionEvent event){
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+//                mPicker.getObjectAt(x,y);
+                touchedX = x;
+                touchedY = y;
+                Log.d("touched","X="+ x);
+                Log.d("touched","Y="+ y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mPicker.getObjectAt(x,y);
+//                touchedX = x;
+//                touchedY = y;
+                Log.d("touched","X="+ x);
+                Log.d("touched","Y="+ y);
+                break;
+            default:break;
+        }
+
     }
 
 //    @Override
